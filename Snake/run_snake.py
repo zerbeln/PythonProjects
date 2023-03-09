@@ -24,10 +24,10 @@ if __name__ == '__main__':
 
     # Event Handlers (Listens for arrow key presses to interact with snake)
     screen.listen()
-    screen.onkey(snake.snake_up, "Up")
-    screen.onkey(snake.snake_down, "Down")
-    screen.onkey(snake.snake_left, "Left")
-    screen.onkey(snake.snake_right, "Right")
+    screen.onkey(lambda: snake.set_snake_direction("up"), "Up")
+    screen.onkey(lambda: snake.set_snake_direction("down"), "Down")
+    screen.onkey(lambda: snake.set_snake_direction("left"), "Left")
+    screen.onkey(lambda: snake.set_snake_direction("right"), "Right")
 
     # Create instance of game
     game = SnakeGameEnvironment(snake, screen)

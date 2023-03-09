@@ -8,6 +8,7 @@ class SnakeGameEnvironment:
         self.time_delay = 100
         self.snake = snake
         self.screen = screen
+        self.score = 0
 
         # Food parameters
         self.food_size = 10 / 20  # Food is 10 pixels
@@ -48,13 +49,23 @@ class SnakeGameEnvironment:
         """
         Checks to see if the snake has collided with (eaten) food
         """
-
         if self.calc_lin_dist(self.snake.body[-1], self.food_pos) < 20:
             self.food_pos = self.generate_food()
             self.food.goto(self.food_pos[0], self.food_pos[1])
+            self.score += 1  # Score goes up for snake eating food
             return True
         else:
             return False
+
+    def reset_game(self):
+        """
+        Reset the game to initial state
+        """
+        self.score = 0
+        self.snake.body = [[0, 0], [20, 0], [40, 0]]
+        self.snake.snake_direction = "right"
+        self.food_pos = self.generate_food()
+        self.food.goto(self.food_pos[0], self.food_pos[1])
 
     def game_loop(self):
         """
@@ -69,7 +80,7 @@ class SnakeGameEnvironment:
 
         # Check for collisions
         if self.snake.check_collisions(new_head):
-            turtle.bye()  # Closes game if a collision occurs
+            self.reset_game()  # Reset game if a bad collision occurs
         else:
             # Add new head to snake's body
             self.snake.add_to_body(new_head[0], new_head[1])  # Add new snake head to body
@@ -82,6 +93,7 @@ class SnakeGameEnvironment:
 
             # Redraw the snake
             self.snake.print_snake()
+            self.screen.title(f'Snake Game. Score: {self.score}')
             self.screen.update()
 
-            turtle.ontimer(self.game_loop, self.time_delay)
+        turtle.ontimer(self.game_loop, self.time_delay)

@@ -27,33 +27,20 @@ class Snake(turtle.Turtle):
             self.goto(segment[0], segment[1])
             self.stamp()
 
-    def snake_left(self):
+    def set_snake_direction(self, direction):
         """
-        Changes snake direction to left if snake is not going right
+        Set the snake's direction based on key inputs
         """
-        if self.snake_direction != "right":
-            self.snake_direction = "left"
-
-    def snake_right(self):
-        """
-        Changes snake direction to right if snake is not going left
-        """
-        if self.snake_direction != "left":
-            self.snake_direction = "right"
-
-    def snake_up(self):
-        """
-        Changes snake direction to up if snake is not going down
-        """
-        if self.snake_direction != "down":
+        if direction == "up" and self.snake_direction != "down":
             self.snake_direction = "up"
-
-    def snake_down(self):
-        """
-        Changes snake direction to down if snake is not going up
-        """
-        if self.snake_direction != "up":
+        elif direction == "down" and self.snake_direction != "up":
             self.snake_direction = "down"
+        elif direction == "right" and self.snake_direction != "left":
+            self.snake_direction = "right"
+        elif direction == "left" and self.snake_direction != "right":
+            self.snake_direction = "left"
+        else:
+            pass
 
     def check_collisions(self, new_head):
         """
