@@ -33,7 +33,7 @@ class SnakeGameEnvironment:
 
     def generate_food(self):
         """
-        Genrate a food object somewhere on the map
+        Generate a food object somewhere on the map
         """
         x = random.randint(-self.screen.window_width()/2 + 20, self.screen.window_width()/2 - 20)
         y = random.randint(-self.screen.window_height()/2 + 20, self.screen.window_height()/2 - 20)
@@ -72,9 +72,9 @@ class SnakeGameEnvironment:
         Main game loop where snake moves based on direction inputs.
         """
         self.snake.clearstamps()  # Clears existing stamps
-        new_head = self.snake.body[-1].copy()
 
         # Create new snake head along current direction
+        new_head = self.snake.body[-1].copy()
         new_head[0] += self.snake.actions[self.snake.snake_direction][0]
         new_head[1] += self.snake.actions[self.snake.snake_direction][1]
 
