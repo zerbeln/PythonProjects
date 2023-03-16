@@ -29,7 +29,7 @@ class TorchNetwork(torch.nn.Module):
         Run the rover neural network and convert inputs from a numpy array to a tensor
         """
         network_inputs = torch.from_numpy(inputs)
-        x1 = torch.nn.functional.sigmoid(self.l1(network_inputs))
-        outputs = torch.nn.functional.sigmoid(self.l2(x1))
+        x1 = torch.sigmoid(self.l1(network_inputs))
+        outputs = torch.sigmoid(self.l2(x1))
 
         return outputs
